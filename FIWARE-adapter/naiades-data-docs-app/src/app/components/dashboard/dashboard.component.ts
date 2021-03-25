@@ -8,7 +8,7 @@ import { EntitiesService } from '../../services/entities.service';
 
 interface Source {
     name: string;
-    status: boolean;
+    status: number;
 }
 
 @Component({
@@ -35,12 +35,12 @@ export class DashboardComponent implements OnInit {
 
         this.fiwareApi = {
             name: 'Fiware API',
-            status: false
+            status: 0
         };
 
         this.pythonServer = {
             name: 'Python server',
-            status: false
+            status: 0
         };
     }
 
@@ -91,6 +91,8 @@ export class DashboardComponent implements OnInit {
 
     ngOnInit(): void {
         this.entities = entities;
+        this.fiwareApi.status = this.entitiesService.getFiwareApiStatus();
+        this.pythonServer.status = this.entitiesService.getServerStatus();
         this.interval = setInterval(() => {
             this.fiwareApi.status = this.entitiesService.getFiwareApiStatus();
             this.pythonServer.status = this.entitiesService.getServerStatus();

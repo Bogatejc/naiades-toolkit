@@ -13,8 +13,8 @@ import { first } from 'rxjs/operators';
 export class EntitiesService {
     private serverApiUrl = environment.apiUrl;
     private source = interval(5000);
-    private pythonServerStatus = false;
-    private fiwareApiStatus = false;
+    private pythonServerStatus = 0;
+    private fiwareApiStatus = 0;
 
     constructor(private http: HttpClient){
         this.source.subscribe(() => {
@@ -23,25 +23,25 @@ export class EntitiesService {
                 .pipe(first())
                 .subscribe(resp => {
                     if (resp.status === 200){
-                        this.pythonServerStatus = true;
+                        this.pythonServerStatus = 1;
                     } else {
-                        this.pythonServerStatus = false;
+                        this.pythonServerStatus = 2;
                     }
-                }, err => this.pythonServerStatus = false);
+                }, err => this.pythonServerStatus = 2);
             this.http
                 .get(`http://${this.serverApiUrl}/pingApi`, { observe: 'response' })
                 .pipe(first())
                 .subscribe(resp => {
                     if (resp.status === 200){
                         if (JSON.parse(JSON.stringify(resp.body)).status === 'Pass'){
-                            this.fiwareApiStatus = true;
+                            this.fiwareApiStatus = 1;
                         } else {
-                            this.fiwareApiStatus = false;
+                            this.fiwareApiStatus = 2;
                         }
                     } else {
-                        this.fiwareApiStatus = false;
+                        this.fiwareApiStatus = 2;
                     }
-                }, err => this.fiwareApiStatus = false);
+                }, err => this.fiwareApiStatus = 2);
         });
     }
 
@@ -54,11 +54,11 @@ export class EntitiesService {
         return res;
     }
 
-    public getServerStatus(): boolean {
+    public getServerStatus(): number {
         return this.pythonServerStatus;
     }
 
-    public getFiwareApiStatus(): boolean {
+    public getFiwareApiStatus(): number {
         return this.fiwareApiStatus;
     }
 

@@ -7,8 +7,9 @@
                     <div class="col mr-2">
                         <div class="h5 mb-0 font-weight-bold text-gray-800">{{pythonServer.name}}</div>
                     </div>
-                    <div class="col-auto" *ngIf="pythonServer.status; then up else down">
-                    </div>
+                    <div class="col-auto" *ngIf="pythonServer.status === 0; then connecting"></div>
+                    <div class="col-auto" *ngIf="pythonServer.status === 1; then up"></div>
+                    <div class="col-auto" *ngIf="pythonServer.status === 2; then down"></div>  
                 </div>
             </div>
         </div>
@@ -20,8 +21,9 @@
                     <div class="col mr-2">
                         <div class="h5 mb-0 font-weight-bold text-gray-800">{{fiwareApi.name}}</div>
                     </div>
-                    <div class="col-auto" *ngIf="fiwareApi.status; then up else down">
-                    </div>
+                    <div class="col-auto" *ngIf="fiwareApi.status === 0; then connecting"></div>
+                    <div class="col-auto" *ngIf="fiwareApi.status === 1; then up"></div>
+                    <div class="col-auto" *ngIf="fiwareApi.status === 2; then down"></div>
                 </div>
             </div>
         </div>
@@ -59,6 +61,9 @@
 </div>
 
 <!-- Dynamic components for status -->
+<ng-template #connecting>
+    Connecting...
+</ng-template>
 <ng-template #up>
     <img src="../../../assets/images/green_icon.ico" class="dot">UP
 </ng-template>

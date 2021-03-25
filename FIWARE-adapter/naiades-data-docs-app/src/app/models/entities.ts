@@ -21,6 +21,8 @@ const entities: Entity[] =  [
     {entityId: 'urn:ngsi-ld:Device:Rambla-Volume', service: 'alicante'},
     {entityId: 'urn:ngsi-ld:Device:Rambla-Flow', service: 'alicante'},
     {entityId: 'urn:ngsi-ld:Device:Device-test', service: 'alicante'},
+    {entityId: 'urn:ngsi-ld:Device:EA003-36-Conductivity', service: 'alicante'},
+    {entityId: 'urn:ngsi-ld:Device:EA001-36-Level', service: 'alicante'},
     {entityId: 'urn:ngsi-ld:WeatherObserved:WeatherObserved', service: 'braila'},
     {entityId: 'urn:ngsi-ld:WeatherForecast:WeatherForecast-Day0-0', service: 'braila'},
     {entityId: 'urn:ngsi-ld:WeatherForecast:WeatherForecast-Day0-1', service: 'braila'},

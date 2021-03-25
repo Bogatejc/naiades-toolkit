@@ -1,4 +1,4 @@
 export const environment = {
-  apiUrl: 'localhost:5004',
+  apiUrl: 'atena.ijs.si:5004',
   production: true
 };

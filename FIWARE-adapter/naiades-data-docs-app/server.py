@@ -55,11 +55,11 @@ def getEntitySummary():
         dict_['http_status'] = 200
         dict_['first_date'] = body['index'][0]
         attribute_name = body['attributes'][0]['attrName']
-        r = requests.get(baseUrl + request.args.get('entityId') + '?attrs=' + attribute_name + '&aggrMethod=count', headers=headers)
+        r = requests.get(baseUrl + "/entities/" + request.args.get('entityId') + '?attrs=' + attribute_name + '&aggrMethod=count', headers=headers)
         if(r.status_code == requests.codes.ok):
             body = r.json()
             dict_['sample_count'] = body['attributes'][0]['values'][0]
-        r = requests.get(baseUrl + request.args.get('entityId') + '?lastN=1', headers=headers)
+        r = requests.get(baseUrl + "/entities/" + request.args.get('entityId') + '?lastN=1', headers=headers)
         if(r.status_code == requests.codes.ok):
             body = r.json()
             dict_['last_date'] = body['index'][0]
